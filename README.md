@@ -1,4 +1,4 @@
-Go-recsys
+Gorec
 =========
 
-Go-recsys: a recommending engine for go language
+Gorec: a recommending engine for go language
