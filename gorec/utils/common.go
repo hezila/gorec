@@ -16,7 +16,7 @@ package utils
 import "fmt"
 
 // Return sequence integers with the begining value as x
-func IntSequence(begin int) func() int {
+func IntSequence(x int) func() int {
     i := begin
     return func() int {
         i += 1
