@@ -14,3 +14,7 @@ Gorec: a recommending engine for go language
 
 + [Go: Handling Arbitrary JSON](http://devel.io/2013/08/19/go-handling-arbitrary-json/)
 + [Decode JSON Document in Go](http://www.goinggo.net/2014/01/decode-json-documents-in-go.html)
+
+### Web
+
++ [Restful micro framwork in go](http://dougblack.io/words/a-restful-micro-framework-in-go.html)
