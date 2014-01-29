@@ -14,9 +14,9 @@
 package math
 
 func fibonacci() func() int {
-     var x, y int = -1, 1
-     return func() int {
-     	    x, y = y, x + y
-	    return y
-     }
+	var x, y int = -1, 1
+	return func() int {
+		x, y = y, x+y
+		return y
+	}
 }

@@ -14,17 +14,17 @@
 package utils
 
 import (
-       "fmt"
-       "reflect"
-}
+	"fmt"
+	"reflect"
+)
 
 // Return sequence integers with the begining value as x
 func IntSequence(x int) func() int {
-    i := begin
-    return func() int {
-        i += 1
-        return i
-    }
+	i := begin
+	return func() int {
+		i += 1
+		return i
+	}
 }
 
 // from: https://gist.github.com/rafkhan/6501567
@@ -34,7 +34,6 @@ type mapf func(interface{}) interface{}
 
 // reduce function types
 type reducef func(interface{}, interface{}) interface{}
-
 
 // filter function types
 type filterf func(interface{}) bool
@@ -47,14 +46,14 @@ type filterf func(interface{}) bool
 //     	 return val.(int) * 2
 //     })
 // should be [2, 4, 6, 8]
-func Map(in interface{}, fn mapf) interface {} {
-     val := reflect.ValueOf(in)
-     out := make([]interface{}, val.Len())
-     
-     for i := 0; i < val.Len(); i++ {
-     	 out[i] = fn(val.Index(i).Interface())
-     }
-     return out
+func Map(in interface{}, fn mapf) interface{} {
+	val := reflect.ValueOf(in)
+	out := make([]interface{}, val.Len())
+
+	for i := 0; i < val.Len(); i++ {
+		out[i] = fn(val.Index(i).Interface())
+	}
+	return out
 }
 
 //Reduce(slice, starting value, func)
@@ -64,12 +63,12 @@ func Map(in interface{}, fn mapf) interface {} {
 //   return memo.(int) + val.(int)
 // })
 func Reduce(in interface{}, memo interface{}, fn reducef) interface{} {
-     val := reflect.ValueOf(in)
-     
-     for i:=0; i < val.Len(); i++ {
-     	 memo = fn(val.Index(i).Interface(), memo)
-     }
-     return memo
+	val := reflect.ValueOf(in)
+
+	for i := 0; i < val.Len(); i++ {
+		memo = fn(val.Index(i).Interface(), memo)
+	}
+	return memo
 }
 
 //Filter(slice, predicate func)
@@ -78,14 +77,14 @@ func Reduce(in interface{}, memo interface{}, fn reducef) interface{} {
 //   return val.(int) % 4 == 0
 //})
 func Filter(in interface{}, fn filterf) interface{} {
-     val := reflect.ValueOf(in)
-     out := make([]interface{}, 0, val.Len())
+	val := reflect.ValueOf(in)
+	out := make([]interface{}, 0, val.Len())
 
-     for i := 0; i < val.Len(); i++ {
-     	 current := val.Index(i).Interface()
-	 if fn(current) {
-	    out = append(out, current)
-	 }
-     }
-     return out
+	for i := 0; i < val.Len(); i++ {
+		current := val.Index(i).Interface()
+		if fn(current) {
+			out = append(out, current)
+		}
+	}
+	return out
 }

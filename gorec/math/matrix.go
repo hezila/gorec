@@ -11,38 +11,69 @@
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //    See the License for the specific language
 
-pakcage math
+package math
 
 import (
-       "math"
-       "log"
-       "errors"
-       "strings"
+	"errors"
+	"log"
+	"math"
+	"strings"
 )
 
 // matrix interface defining matrix operations
 type Matrix interface {
-     // Return true if the matrix is nil.
-     Nil() bool
+	// Return true if the matrix is nil.
+	Nil() bool
 
-     // Return the number of rows of this matrix
-     Rows() int64
+	// Return the number of rows of this matrix
+	Rows() int
 
-     // Return the number of columns of this matrix
-     Cols() int64
+	// Return the number of columns of this matrix
+	Cols() int
 
-     // Return the number of elements contained in this matrix
-     NumElements() int64
-     
-     // Return the dimension of the matrix
-     Dimension() (int64, int64)
+	// Return the number of elements contained in this matrix
+	NumElements() int
 
-     // Get the value in the ith row and jth column
-     Get(int64, int64) float64
+	// Size of the leading index
+	LeadingIndex() int
 
-     // Set the value in the ith row and jth column
-     Set(int64, int64, float64, error)
+	// Return the dimension of the matrix
+	Dimension() (int, int)
 
-     // The pretty-print string
-     String() string
+	// Get the value in the ith row and jth column
+	Get(int, int) float64
+
+	// Set the value in the ith row and jth column
+	Set(int, int, float64, error)
+
+	// The pretty-print string
+	String() string
+}
+
+// Stacking direction for matrix constructor
+type Stacking int
+
+const StackDown = Stacking(0)
+const stackRight = Stacking(1)
+
+// Matrix constructor data order
+type DataOrder int
+
+const RowOrder = DataOrder(0)
+const ColumnOrder = DataOrder(1)
+
+// Tridiagonal matrix type
+type Tridiagonal int
+
+const Symetric = Tridiagonal(0)
+const Lower = Tridiagonal(1)
+const Upper = Tridiagonal(2)
+
+// Matrix dimensions, rows, cols and leading index.
+// leading index is equal to row count.
+type dimensions struct {
+	rows int
+	cols int
+	// actual offset between leading index
+	step int
 }

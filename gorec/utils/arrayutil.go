@@ -18,23 +18,23 @@ import "fmt"
 type filterInt func(int) bool
 
 func IntFilter(slice []int, f filterInt) []int {
-     var result []int
-     for _, value := range slice {
-     	 if f(value) {
-	    result = append(result, value)
-	 }
-     }
-     return result
+	var result []int
+	for _, value := range slice {
+		if f(value) {
+			result = append(result, value)
+		}
+	}
+	return result
 }
 
 type filterFloat func(float) bool
 
 func FloatFilter(slice []float, f filterFloat) []float {
-     var result []float;
-     for _, value := range slice {
-     	 if f(value) {
-	    result = append(result, value)
-	 }
-     }
-     return result
+	var result []float
+	for _, value := range slice {
+		if f(value) {
+			result = append(result, value)
+		}
+	}
+	return result
 }
