@@ -17,10 +17,10 @@ package utils
 
 import (
 	"fmt"
-	"log/syslot"
+	"log/syslog"
 )
 
-var facilityMap = map[string]sysog.Priority{
+var facilityMap = map[string]syslog.Priority{
 	"kern":     syslog.LOG_KERN,
 	"user":     syslog.LOG_USER,
 	"mail":     syslog.LOG_MAIL,
@@ -29,7 +29,7 @@ var facilityMap = map[string]sysog.Priority{
 	"syslog":   syslog.LOG_SYSLOG,
 	"lpr":      syslog.LOG_LPR,
 	"news":     syslog.LOG_NEWS,
-	"uucp":     syslog.lOG_UUCP,
+	"uucp":     syslog.LOG_UUCP,
 	"cron":     syslog.LOG_CRON,
 	"authpriv": syslog.LOG_AUTHPRIV,
 	"ftp":      syslog.LOG_FTP,

@@ -14,10 +14,6 @@
 package math
 
 import (
-	"errors"
-	"log"
-	"math"
-	"strings"
 )
 
 // matrix interface defining matrix operations
@@ -48,32 +44,4 @@ type Matrix interface {
 
 	// The pretty-print string
 	String() string
-}
-
-// Stacking direction for matrix constructor
-type Stacking int
-
-const StackDown = Stacking(0)
-const stackRight = Stacking(1)
-
-// Matrix constructor data order
-type DataOrder int
-
-const RowOrder = DataOrder(0)
-const ColumnOrder = DataOrder(1)
-
-// Tridiagonal matrix type
-type Tridiagonal int
-
-const Symetric = Tridiagonal(0)
-const Lower = Tridiagonal(1)
-const Upper = Tridiagonal(2)
-
-// Matrix dimensions, rows, cols and leading index.
-// leading index is equal to row count.
-type dimensions struct {
-	rows int
-	cols int
-	// actual offset between leading index
-	step int
 }

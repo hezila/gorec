@@ -14,12 +14,11 @@
 package utils
 
 import (
-	"fmt"
 	"reflect"
 )
 
 // Return sequence integers with the begining value as x
-func IntSequence(x int) func() int {
+func IntSequence(begin int) func() int {
 	i := begin
 	return func() int {
 		i += 1

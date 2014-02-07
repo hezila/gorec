@@ -13,7 +13,8 @@
 
 package utils
 
-import "fmt"
+import (
+)
 
 type filterInt func(int) bool
 
@@ -27,10 +28,10 @@ func IntFilter(slice []int, f filterInt) []int {
 	return result
 }
 
-type filterFloat func(float) bool
+type filterFloat64 func(float64) bool
 
-func FloatFilter(slice []float, f filterFloat) []float {
-	var result []float
+func Float64Filter(slice []float64, f filterFloat64) []float64 {
+	var result []float64
 	for _, value := range slice {
 		if f(value) {
 			result = append(result, value)
