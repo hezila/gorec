@@ -14,6 +14,8 @@
 package math
 
 import (
+	"fmt"
+	"strings"
 )
 
 // matrix interface defining matrix operations
@@ -44,4 +46,74 @@ type Matrix interface {
 
 	// The pretty-print string
 	String() string
+}
+
+type matrix struct {
+	rows int
+	cols int
+}
+
+func (A *matrix) Nil() bool { return A == nil }
+
+func (A *matrix) Rows() int { return A.rows }
+
+func (A *matrix) Cols() int { return A.cols }
+
+func (A *matrix) Dimension() (rows, cols int) {
+	rows = A.rows
+	cols = A.cols
+	return
+}
+
+func String(A Matrix) string {
+	condense := func(vs string) string {
+		if strings.Index(vs, ".") != -1 {
+			for vs[len(vs)-1] == '0' {
+				vs = vs[0 : len(vs)-1]
+			}
+		}
+		if vs[len(vs)-1] == '.' {
+			vs = vs[0 : len(vs)-1]
+		}
+		return vs
+	}
+
+	if A == nil {
+		return "{nil}"
+	}
+	s := "{"
+
+	maxLen := 0
+	for i := 0; i < A.Rows(); i++ {
+		for j := 0; j < A.Cols(); j++ {
+			v := A.Get(i, j)
+			vs := condense(fmt.Sprintf("%f", v))
+
+			maxLen = maxInt(maxLen, len(vs))
+		}
+	}
+
+	for i := 0; i < A.Rows(); i++ {
+		for j := 0; j < A.Cols(); j++ {
+			v := A.Get(i, j)
+
+			vs := condense(fmt.Sprintf("%f", v))
+
+			for len(vs) < maxLen {
+				vs = " " + vs
+			}
+			s += vs
+			if i != A.Rows()-1 || j != A.Cols()-1 {
+				s += ","
+			}
+			if j != A.Cols()-1 {
+				s += " "
+			}
+		}
+		if i != A.Rows()-1 {
+			s += "\n "
+		}
+	}
+	s += "}"
+	return s
 }
