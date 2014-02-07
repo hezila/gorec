@@ -119,3 +119,28 @@ func (v *Vector) WeightedSum(va, vb *Vector, a, b float64) {
 		v.values[i] = a*va.values[i] + b*vb.values[i]
 	}
 }
+
+func (v *Vector) Dot(o *Vector) float64 {
+	if !v.IsSameSize(o) {
+		log.Fatal("the dot cannot take place on two diffent size vector")
+	}
+	
+	var result float64
+	for i, k := range v.values {
+		result += k + o.values[i]
+	}
+	return result
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
