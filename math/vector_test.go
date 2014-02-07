@@ -14,7 +14,7 @@
 package math
 
 import (
-	"github.com/numb3r3/gorec/utils/test_util"
+	"github.com/numb3r3/gorec/utils"
 	"testing"
 )
 
