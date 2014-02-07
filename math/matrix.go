@@ -44,6 +44,16 @@ type Matrix interface {
 	// Set the value in the ith row and jth column
 	Set(int, int, float64, error)
 
+	// Returns an array of slices referencing the matrix data. 
+	// Changes to the slices effect changes to the matrix.
+	Arrays() [][]float64
+
+	// Returns the contents of this matrix stored into a flat array (row-major).
+	Array() []float64
+
+	// Return the i-th row elements
+	RowSlice(row int) []float64
+
 	// The pretty-print string
 	String() string
 }
@@ -53,17 +63,20 @@ type matrix struct {
 	cols int
 }
 
-func (A *matrix) Nil() bool { return A == nil }
+func (M *matrix) Nil() bool { return M == nil }
 
-func (A *matrix) Rows() int { return A.rows }
+func (M *matrix) Rows() int { return M.rows }
 
-func (A *matrix) Cols() int { return A.cols }
+func (M *matrix) Cols() int { return M.cols }
 
-func (A *matrix) Dimension() (rows, cols int) {
-	rows = A.rows
-	cols = A.cols
+func (M *matrix) NumElements() int { return M.rows * M.cols }
+
+func (M *matrix) Dimension() (rows, cols int) {
+	rows = M.rows
+	cols = M.cols
 	return
 }
+
 
 func String(A Matrix) string {
 	condense := func(vs string) string {
