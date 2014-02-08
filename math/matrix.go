@@ -54,6 +54,9 @@ type Matrix interface {
 	// Return the i-th row elements
 	RowSlice(row int) []float64
 
+	// Return the j-th column elements
+	ColSlice(col int) []float64
+
 	// The pretty-print string
 	String() string
 }

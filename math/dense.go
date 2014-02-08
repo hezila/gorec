@@ -14,16 +14,16 @@
 package math
 
 import (
-	"math/rand"
+	"log"
 )
 
 // A matrix backed by a flat array of all elements
 type DenseMatrix struct {
 	matrix
-	
+
 	// flatted elements
 	elements []float64
-	
+
 	// offset between rows; step = cols
 	step int
 }
@@ -33,9 +33,9 @@ func NewDenseMatrix(rows, cols int) *DenseMatrix {
 	M.rows = rows
 	M.cols = cols
 	M.step = cols
-	
-	M.elements = make([]float64, rows * cols)
-	for i := 0; i < rows * cols; i++ {
+
+	M.elements = make([]float64, rows*cols)
+	for i := 0; i < rows*cols; i++ {
 		M.elements[i] = 0.0
 	}
 	return M
@@ -65,36 +65,75 @@ func MakeDenseMatrixStacked(data [][]float64) *DenseMatrix {
 func (M *DenseMatrix) Arrays() [][]float64 {
 	a := make([][]float64, M.rows)
 	for i := 0; i < M.rows; i++ {
-		a[i] = A.elements[i*M.step : i*M.step + M.cols]
+		a[i] = M.elements[i*M.step : i*M.step+M.cols]
 	}
 	return a
 }
 
 func (M *DenseMatrix) Array() []float64 {
 	if M.step == M.rows {
-		return A.elements[0 : M.rows*M.cols]
+		return M.elements[0 : M.rows*M.cols]
 	}
 	a := make([]float64, M.rows*M.cols)
 	for i := 0; i < M.rows; i++ {
 		for j := 0; j < M.cols; j++ {
-			a[i*M.cols + j] = M.elements[i*M.step + j]
+			a[i*M.cols+j] = M.elements[i*M.step+j]
 		}
 	}
 	return a
 }
 
-func (M *DenseMatrix) rowSlice(row int) []float64 {
-	return M.elements[row*M.step : row*M.step + M.cols]
+func (M *DenseMatrix) RowSlice(row int) []float64 {
+	return M.elements[row*M.step : row*M.step+M.cols]
 }
 
+func (M *DenseMatrix) ColSlice(col int) []float64 {
+	var col_array = make([]float64, M.Rows())
+	for i := 0; i < M.Rows(); i++ {
+		col_array[i] = M.Get(i, col)
+	}
+	return col_array
+}
 
+func (M *DenseMatrix) Get(i, j int) float64 {
+	if i >= M.Rows() || j >= M.Cols() {
+		log.Fatal("index out of bounds")
+	}
+	return M.elements[i*M.step+j]
+}
 
+func (M *DenseMatrix) Set(i, j int, v float64) {
+	if i >= M.Rows() || j >= M.Cols() {
+		log.Fatal("index out of bounds")
+	}
+	M.elements[i*M.step+j] = v
+}
 
+// Get a submatrix starting at i, j with rows rows and cols columns
+func (M *DenseMatrix) GetMatrix(i, j, rows, cols int) *DenseMatrix {
+	if (i + rows) >= M.Rows() || (j + cols) >= M.Cols() {
+		log.Fatal("index out of bounds")
+	}
+	A := new(DenseMatrix)
+	A.elements = make([]float64, rows*cols)
+	A.step = cols
+	A.rows = rows
+	A.cols = cols
+	for r := 0; r < rows; r++ {
+		for c := 0; c < cols; c++ {
+			A.elements[r*A.step + c] =  M.elements[(i+r)*M.step+j + c]
+		}
+	}
+	return A
+}
 
+func (M *DenseMatrix) GetColVector(j int) *DenseMatrix {
+	return M.GetMatrix(0, j, M.rows, 1)
+}
 
-
-
-
+func (M *DenseMatrix) GetRowVector(i int) *DenseMatrix {
+	return M.GetMatrix(i, 0, 1, M.cols)
+}
 
 
 
