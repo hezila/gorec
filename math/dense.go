@@ -88,22 +88,22 @@ func (M *DenseMatrix) RowSlice(row int) []float64 {
 }
 
 func (M *DenseMatrix) ColSlice(col int) []float64 {
-	var col_array = make([]float64, M.Rows())
-	for i := 0; i < M.Rows(); i++ {
+	var col_array = make([]float64, M.rows)
+	for i := 0; i < M.rows; i++ {
 		col_array[i] = M.Get(i, col)
 	}
 	return col_array
 }
 
 func (M *DenseMatrix) Get(i, j int) float64 {
-	if i >= M.Rows() || j >= M.Cols() {
+	if i >= M.rows || j >= M.Cols() {
 		log.Fatal("index out of bounds")
 	}
 	return M.elements[i*M.step+j]
 }
 
 func (M *DenseMatrix) Set(i, j int, v float64) {
-	if i >= M.Rows() || j >= M.Cols() {
+	if i >= M.rows || j >= M.Cols() {
 		log.Fatal("index out of bounds")
 	}
 	M.elements[i*M.step+j] = v
@@ -111,7 +111,7 @@ func (M *DenseMatrix) Set(i, j int, v float64) {
 
 // Get a submatrix starting at i, j with rows rows and cols columns
 func (M *DenseMatrix) SubMatrix(i, j, rows, cols int) *DenseMatrix {
-	if (i + rows) >= M.Rows() || (j + cols) >= M.Cols() {
+	if (i + rows) >= M.rows || (j + cols) >= M.cols {
 		log.Fatal("index out of bounds")
 	}
 	A := new(DenseMatrix)
