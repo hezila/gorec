@@ -110,7 +110,7 @@ func (M *DenseMatrix) Set(i, j int, v float64) {
 }
 
 // Get a submatrix starting at i, j with rows rows and cols columns
-func (M *DenseMatrix) GetMatrix(i, j, rows, cols int) *DenseMatrix {
+func (M *DenseMatrix) SubMatrix(i, j, rows, cols int) *DenseMatrix {
 	if (i + rows) >= M.Rows() || (j + cols) >= M.Cols() {
 		log.Fatal("index out of bounds")
 	}
@@ -127,13 +127,46 @@ func (M *DenseMatrix) GetMatrix(i, j, rows, cols int) *DenseMatrix {
 	return A
 }
 
-func (M *DenseMatrix) GetColVector(j int) *DenseMatrix {
-	return M.GetMatrix(0, j, M.rows, 1)
+func (M *DenseMatrix) ColVector(j int) *DenseMatrix {
+	return M.SubMatrix(0, j, M.rows, 1)
 }
 
-func (M *DenseMatrix) GetRowVector(i int) *DenseMatrix {
-	return M.GetMatrix(i, 0, 1, M.cols)
+func (M *DenseMatrix) RowVector(i int) *DenseMatrix {
+	return M.SubMatrix(i, 0, 1, M.cols)
 }
+
+
+func (M *DenseMatrix) Copy() *DenseMatrix {
+	A := new(DenseMatrix)
+	A.rows = M.rows
+	A.cols = M.cols
+	A.step = M.step
+	A.elements = make([]float64, M.rows * M.cols)
+	for r := 0; r < A.rows; r++ {
+		copy(A.RowSlice(r), M.RowSlice(r))
+	}
+	return A
+}
+
+func (M *DenseMatrix) AugmentFill(A, B *DenseMatrix) (err error) {
+	if M.rows != A.rows || M.rows != B.rows || B.cols != M.rows + A.rows {
+		err = ErrorDimensionMismatch
+		return
+	}
+	
+	// TODO
+	// B.SetMatrix(0, 0, M)
+	// B.SetMatrix(0, A.cols, A)
+	return
+}
+
+
+
+
+
+
+
+
 
 
 
