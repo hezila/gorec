@@ -18,3 +18,7 @@ Gorec: a recommending engine for go language
 ### Web
 
 + [Restful micro framwork in go](http://dougblack.io/words/a-restful-micro-framework-in-go.html)
+
+### Machine Learning
+
++ [Beyond stochastic gradient descent for large-scale machine learning](http://www.esat.kuleuven.be/stadius/ROKS2013/files/presentations/fbach_roks_2013.pdf)
