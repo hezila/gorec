@@ -14,6 +14,7 @@
 package math
 
 import (
+	"fmt"
 	"log"
 )
 
@@ -87,14 +88,6 @@ func (M *DenseMatrix) RowSlice(row int) []float64 {
 	return M.elements[row*M.step : row*M.step+M.cols]
 }
 
-func (M *DenseMatrix) ColSlice(col int) []float64 {
-	var col_array = make([]float64, M.rows)
-	for i := 0; i < M.rows; i++ {
-		col_array[i] = M.Get(i, col)
-	}
-	return col_array
-}
-
 func (M *DenseMatrix) Get(i, j int) float64 {
 	if i >= M.rows || j >= M.Cols() {
 		log.Fatal("index out of bounds")
@@ -105,13 +98,16 @@ func (M *DenseMatrix) Get(i, j int) float64 {
 func (M *DenseMatrix) Set(i, j int, v float64) {
 	if i >= M.rows || j >= M.Cols() {
 		log.Fatal("index out of bounds")
+		panic(ErrorIllegalIndex)
 	}
 	M.elements[i*M.step+j] = v
 }
 
 // Get a submatrix starting at i, j with rows rows and cols columns
 func (M *DenseMatrix) SubMatrix(i, j, rows, cols int) *DenseMatrix {
-	if (i + rows) >= M.rows || (j + cols) >= M.cols {
+	if (i + rows) > M.rows || (j + cols) > M.cols {
+		fmt.Printf("R: %d\t%d\n", i+rows, M.rows)
+		fmt.Printf("C: %d\t%d\n", j+cols, M.cols)
 		log.Fatal("index out of bounds")
 	}
 	A := new(DenseMatrix)
@@ -160,21 +156,4 @@ func (M *DenseMatrix) AugmentFill(A, B *DenseMatrix) (err error) {
 	return
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+func (M *DenseMatrix) String() string { return String(M) }

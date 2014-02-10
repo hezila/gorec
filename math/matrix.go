@@ -32,9 +32,6 @@ type Matrix interface {
 	// Return the number of elements contained in this matrix
 	NumElements() int
 
-	// Size of the leading index
-	LeadingIndex() int
-
 	// Return the dimension of the matrix
 	Dimension() (int, int)
 
@@ -42,20 +39,14 @@ type Matrix interface {
 	Get(int, int) float64
 
 	// Set the value in the ith row and jth column
-	Set(int, int, float64, error)
+	Set(int, int, float64)
 
 	// Returns an array of slices referencing the matrix data. 
 	// Changes to the slices effect changes to the matrix.
 	Arrays() [][]float64
 
-	// Returns the contents of this matrix stored into a flat array (row-major).
+	// Returns the contents/slices of this matrix stored into a flat array (row-major).
 	Array() []float64
-
-	// Return the i-th row elements
-	RowSlice(row int) []float64
-
-	// Return the j-th column elements
-	ColSlice(col int) []float64
 
 	// The pretty-print string
 	String() string
