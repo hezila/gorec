@@ -13,31 +13,23 @@
 
 package data
 
-import (
-	"github.com/numb3r3/gorec/utils"
-)
+type DatasetIterator interface {
 
-type Dataset interface {
-	NumInstance() int
+	// Start the iteration
+	Start()
+
+	// Whether END of the samples
+	End() bool
 	
-	CreateIterator() DatasetIterator
+	// Jump to the next one
+	Next()
 
-	GetOption() DatasetOptions
-	
-	GetFeatureDictionary() *utils.Dictionary
+	// Skip to the next n one
+	Skip(n int)
 
-	GetLabelDictionary() *utils.Dictionary
+	// Get the current sample
+	GetInstance() *Instance
 }
-
-func ConvertNamedFeatures(instance *Instance, dict *utils.Dictionary) {
-	if instance.Features != nil {
-		return
-	}
-
-
-}
-
-
 
 
 

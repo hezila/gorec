@@ -13,31 +13,20 @@
 
 package data
 
-import (
-	"github.com/numb3r3/gorec/utils"
-)
-
-type Dataset interface {
-	NumInstance() int
+// Output of a sample item
+type InstanceOutput struct {
+	// Label for classification
+	Label int
 	
-	CreateIterator() DatasetIterator
+	// Object value for regression problem
+	Value float64
 
-	GetOption() DatasetOptions
+	// String label
+	LabelStr string
 	
-	GetFeatureDictionary() *utils.Dictionary
-
-	GetLabelDictionary() *utils.Dictionary
+	// Labeling possibilities
+	LabelLikelihood []float64
 }
-
-func ConvertNamedFeatures(instance *Instance, dict *utils.Dictionary) {
-	if instance.Features != nil {
-		return
-	}
-
-
-}
-
-
 
 
 

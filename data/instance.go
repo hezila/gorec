@@ -13,38 +13,25 @@
 
 package data
 
-import (
-	"github.com/numb3r3/gorec/utils"
-)
+// one sample item
 
-type Dataset interface {
-	NumInstance() int
-	
-	CreateIterator() DatasetIterator
+type Instance struct {
 
-	GetOption() DatasetOptions
-	
-	GetFeatureDictionary() *utils.Dictionary
+	// Sample features
+	Features []float64
 
-	GetLabelDictionary() *utils.Dictionary
+	// Features indexing by "Name"
+	NamedFeatures map[string]float64
+
+	// Label/Output
+	// Only used for fixing the supervised model
+	// it is assinged with nil in the unsupervised fashion
+	Output *IntanceOutput
+
+	// the name of the sample
+	// Can be nil
+	Name string
+
+	// Addtional information
+	Attachement interface{}
 }
-
-func ConvertNamedFeatures(instance *Instance, dict *utils.Dictionary) {
-	if instance.Features != nil {
-		return
-	}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-

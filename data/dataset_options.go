@@ -13,31 +13,18 @@
 
 package data
 
-import (
-	"github.com/numb3r3/gorec/utils"
-)
-
-type Dataset interface {
-	NumInstance() int
+type DatasetOptions struct {
+	FeatureIsSparse bool
 	
-	CreateIterator() DatasetIterator
-
-	GetOption() DatasetOptions
+	FeatureDimension int
 	
-	GetFeatureDictionary() *utils.Dictionary
+	IsSupervisedLearning int
 
-	GetLabelDictionary() *utils.Dictionary
+	NumLabels int
+	
+
+	Options interface{}
 }
-
-func ConvertNamedFeatures(instance *Instance, dict *utils.Dictionary) {
-	if instance.Features != nil {
-		return
-	}
-
-
-}
-
-
 
 
 
