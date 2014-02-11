@@ -26,7 +26,7 @@ type Instance struct {
 	// Label/Output
 	// Only used for fixing the supervised model
 	// it is assinged with nil in the unsupervised fashion
-	Output *IntanceOutput
+	Output *InstanceOutput
 
 	// the name of the sample
 	// Can be nil
