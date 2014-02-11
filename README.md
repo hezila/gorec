@@ -22,3 +22,4 @@ Gorec: a recommending engine for go language
 ### Machine Learning
 
 + [Beyond stochastic gradient descent for large-scale machine learning](http://www.esat.kuleuven.be/stadius/ROKS2013/files/presentations/fbach_roks_2013.pdf)
++ [Sibyl: large scale supervised ML from google](http://users.soe.ucsc.edu/~niejiazhong/slides/chandra.pdf)
