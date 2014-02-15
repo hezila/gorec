@@ -261,21 +261,3 @@ func MakeDenseCopy(M Matrix) *DenseMatrix {
 	}
 	return A
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
