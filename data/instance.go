@@ -13,14 +13,13 @@
 
 package data
 
-// one sample item
-
+// One sample/instance item
 type Instance struct {
 
 	// Sample features
 	Features []float64
 
-	// Features indexing by "Name"
+	// Features indexing by "name"
 	NamedFeatures map[string]float64
 
 	// Label/Output

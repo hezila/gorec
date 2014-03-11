@@ -30,13 +30,3 @@ type DatasetIterator interface {
 	// Get the current sample
 	GetInstance() *Instance
 }
-
-
-
-
-
-
-
-
-
-
